@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react"
+import Posts from "./components/Posts";
 
 
 function App() {
@@ -20,9 +21,10 @@ function App() {
   }, [])
 
   return (
-    <>
-      <h1>Hi</h1>
-    </>
+    <div>
+    <h1>Post's List</h1>
+      <Posts posts={posts} loading={loading}/>
+    </div>
   )
 }
 
