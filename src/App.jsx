@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react"
 import Posts from "./components/Posts";
+import Pagination from "./components/Pagination";
 
 
 function App() {
@@ -20,10 +21,21 @@ function App() {
     fetchPosts();
   }, [])
 
+  // Current pg 
+  const lastPost = curPg * postPerPg;
+  const firstPost = lastPost - postPerPg;
+  const currPosts = posts.slice(firstPost, lastPost);
+
+  function paginate(number) {
+    setCurPg(number);
+
+  }
+
   return (
     <div>
-    <h1>Post's List</h1>
-      <Posts posts={posts} loading={loading}/>
+      <h1>Post's List</h1>
+      <Posts posts={currPosts} loading={loading} />
+      <Pagination totalPosts={posts.length} postPerPg={postPerPg} paginate={paginate} />
     </div>
   )
 }
